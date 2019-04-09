@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from './../spotify.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private spotify: SpotifyService) {
+    this.spotify.init();
   }
 
 }
