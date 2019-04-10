@@ -31,7 +31,11 @@ import {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatIconModule,
+    MatListModule,
 
   ],
   providers: [],
