@@ -17,8 +17,14 @@ export class SpotifyService {
   private deviceId;
   private token: string;
   private player: any;
-  spotifyApi = new SpotifyWebApi();
-
+  private state: any;
+  private stateSubject = new Subject<any>();
+  public state$: Observable<any>
+  private spotifyApi = new SpotifyWebApi();
+  
+  constructor() {
+    this.state$ = this.stateSubject.asObservable();
+  }
 
   init() {
     this.setToken().then(() => {
@@ -48,7 +54,10 @@ export class SpotifyService {
           this.deviceId = device_id;
           console.log(this.deviceId);
         });
-        resolve(this.deviceId);
+        this.player.addListener('player_state_changed', state => {
+          this.getState(state);
+        });
+        resolve(this.state);
       };
     });
   }
@@ -78,5 +87,10 @@ export class SpotifyService {
     setTimeout(() => {
       this.spotifyApi.transferMyPlayback([this.deviceId], {play: true});
     }, 2500);
+  }
+
+  getState(data: any) {
+    this.state = data;
+    this.stateSubject.next(this.state);
   }
 }
