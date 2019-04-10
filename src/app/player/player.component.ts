@@ -9,12 +9,18 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 export class PlayerComponent {
   imageURL: string;
   artists:  Array<any>;
+  artistURI: string;
+  artistURL: any;
   artistCombined: string;
   album: string;
   song: string;
   playBackDuration: number;
-  paused: boolean;
+  paused = false;
   currentSong: any;
+  playBackTime: number;
+  playBackPercent: number;
+
+
 
   state = this.spotify.state$.subscribe(data => {
     console.log(data);
@@ -23,6 +29,7 @@ export class PlayerComponent {
 
   constructor(private spotify: SpotifyService, private ref: ChangeDetectorRef) {
     this.spotify.init();
+    this.getPlaybackTime()
   }
 
   updateState(data: any) {
@@ -44,6 +51,13 @@ export class PlayerComponent {
       this.song = data.track_window.current_track.name;
       this.ref.detectChanges();
     }
+    if (this.artistURI !== data.track_window.current_track.artists[0].uri) {
+      this.artistURI = data.track_window.current_track.artists[0].uri.substring(15);
+      this.artistURL = this.spotify.spotifyApi.getArtist(this.artistURI).then((artist) => {
+        this.artistURL = artist.images[2].url;
+        this.ref.detectChanges();
+      });
+    }
     if (this.paused !== data.paused) {
       this.paused = data.paused;
       this.ref.detectChanges();
@@ -58,6 +72,34 @@ export class PlayerComponent {
     if (this.currentSong !== song) {
       this.currentSong = song;
     }
+  }
+
+  togglePlayback() {
+    this.spotify.togglePlayback(this.paused);
+  }
+
+  onNext() {
+    this.spotify.skipNext();
+  }
+
+  onPrevious() {
+    this.spotify.skipPrevious();
+  }
+
+  getPlaybackTime() {
+    setInterval(() => {
+      if (!this.paused) {
+        this.spotify.spotifyApi.getMyCurrentPlaybackState().then((data) => {
+          this.playBackTime = data.progress_ms;
+          console.log(this.playBackTime);
+          this.playBackPercent = 100 * this.playBackTime / this.playBackDuration;
+          this.ref.detectChanges();
+          if (this.playBackPercent >= 99) {
+            this.spotify.pausePlayback();
+          }
+        });
+      }
+    }, 1000);
   }
 
 }

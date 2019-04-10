@@ -37,7 +37,8 @@ import {
     MatProgressBarModule,
     MatIconModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule
 
   ],
   providers: [],
