@@ -1,10 +1,14 @@
 <div class="container-col">
   <mat-card class="card">
     <mat-card-header>
+      <img mat-card-avatar src={{artistURL}} alt="Artist Image">
       <mat-card-title>{{song}}</mat-card-title>
       <mat-card-subtitle>{{artistCombined}} | {{album}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src={{imageURL}} alt="Album Cover Art">
+    <img mat-card-image *ngIf="imageURL" [src]="imageURL || ''" alt="Album Cover Art">
+    <mat-card-content>
+        <mat-progress-bar class="album" mode="determinate" value={{playBackPercent}}></mat-progress-bar>
+    </mat-card-content>
     <mat-card-actions>
       <div class="container-row">
         <button mat-icon-button (click)="onPrevious()">

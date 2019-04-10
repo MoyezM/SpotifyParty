@@ -20,7 +20,7 @@ export class SpotifyService {
   private state: any;
   private stateSubject = new Subject<any>();
   public state$: Observable<any>
-  private spotifyApi = new SpotifyWebApi();
+  spotifyApi = new SpotifyWebApi();
   
   constructor() {
     this.state$ = this.stateSubject.asObservable();
@@ -93,4 +93,34 @@ export class SpotifyService {
     this.state = data;
     this.stateSubject.next(this.state);
   }
+
+  pausePlayback() {
+    this.spotifyApi.pause();
+  }
+
+  resumePlayback() {
+    this.spotifyApi.play();
+  }
+
+  skipNext() {
+    this.spotifyApi.skipToNext();
+  }
+
+  skipPrevious() {
+    this.spotifyApi.skipToPrevious();
+  }
+
+  getSongTime() {
+    this.spotifyApi.getMyCurrentPlaybackState()
+  }
+
+  togglePlayback(paused) {
+    if (!paused) {
+      console.log(true)
+      this.spotifyApi.pause();
+    } else if (paused) {
+      this.spotifyApi.play();
+    }
+  }
+
 }
