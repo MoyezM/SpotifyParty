@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 1rem;
 }
 
 .container-row {
@@ -11,19 +12,12 @@
     flex-direction: row;
 }
 
-.album {
-    margin-top: 1rem;
-    width: 390px;
+.card {
+    max-width: 400px;
 }
 
-.next {
-    margin-top: 1rem;
-}
-
-.space-row {
-    margin-right: 64px
-}
-
-div {
-    color: white;
+p {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
 }
