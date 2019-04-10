@@ -15,6 +15,7 @@ import {
   MatToolbarModule,
   MatInputModule,
   MatProgressBarModule,
+  MatCardModule,
 } from '@angular/material';
 
 
@@ -36,6 +37,7 @@ import {
     MatProgressBarModule,
     MatIconModule,
     MatListModule,
+    MatCardModule
 
   ],
   providers: [],
