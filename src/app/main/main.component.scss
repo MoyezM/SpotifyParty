@@ -1,0 +1,9 @@
+.container-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+app-player {
+    margin-right: 2rem;
+}

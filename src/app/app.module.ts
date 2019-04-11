@@ -17,6 +17,7 @@ import {
   MatProgressBarModule,
   MatCardModule,
 } from '@angular/material';
+import { QueueComponent } from './queue/queue.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {
     AppComponent,
     MainComponent,
     PlayerComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    QueueComponent
 
   ],
   imports: [
