@@ -6,6 +6,10 @@
     margin-top: 1rem;
 }
 
+.mat-card {
+    background-color: #111111
+}
+
 .container-row {
     display: flex;
     justify-content: center;
@@ -14,6 +18,14 @@
 
 .card {
     max-width: 400px;
+}
+
+.mat-card-header {
+    color: white;
+}
+
+.mat-card-subtitle {
+    color: white;
 }
 
 p {
