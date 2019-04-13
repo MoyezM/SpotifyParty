@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-queue',
@@ -7,37 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QueueComponent implements OnInit {
 
-  songResultName = [
-    {
-      song: 'Test Song',
-      artist: 'Test Artist',
-      votes: '12'
-    },
-    {
-      song: 'Test sfd Song',
-      artist: 'Test Artist',
-      votes: '152'
-    },
-    {
-      song: 'Test f sdSong',
-      artist: 'Test Artist',
-      votes: '144'
-    },
-    {
-      song: 'Test sdff dsf Song',
-      artist: 'Testsfdsfdssdfsfd Artist',
-      votes: '1'
-    },
-    {
-      song: 'Testsdffdsasdfdfsa Song',
-      artist: 'Test fdsfasfadsfsfd Artist',
-      votes: '142'
-    },
-  ]
+  songResultName = [];
 
-  constructor() { }
+  constructor(private socket: SocketService) { }
 
   ngOnInit() {
+
   }
 
 }
