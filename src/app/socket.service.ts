@@ -37,6 +37,7 @@ export class SocketService {
         let serachResult = {
           socketId: songQuery.socketId,
           result: result.tracks.items,
+          votes: 0,
         };
         this.socket.emit('songResults', serachResult);
       });

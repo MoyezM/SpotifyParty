@@ -13,6 +13,7 @@ export class QueueComponent implements OnInit {
   constructor(private socket: SocketService) { }
 
   ngOnInit() {
+    this.socket.onGetQueue()
 
   }
 
