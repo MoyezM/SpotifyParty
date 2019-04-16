@@ -34,22 +34,37 @@ export class SocketService {
       let query = songQuery.query;
       this.spotify.spotifyApi.searchTracks(query).then((result) => {
         console.log(result.tracks.items);
-        let serachResult = {
+        let searchResult = {
           socketId: songQuery.socketId,
           result: result.tracks.items,
         };
-        this.socket.emit('songResults', serachResult);
+        this.socket.emit('songResults', searchResult);
       });
     });
+  }
+
+  onQueueUpdated$() {
+    let observable = new Observable(observer => {
+      this.socket.on('queueUpdated', (queue) => {
+        console.log(queue);
+        observer.next(queue);
+      });
+    });
+
+    let observer =  {
+      next: (queue) => {
+        return queue;
+      }
+    };
+    return Rx.Subject.create(observer, observable);
   }
 
   connect() {
     this.socket = io('http://localhost:8888/');
     this.onGetSong();
-  
   }
 
-  onGetQueue() {
+  getQueue() {
     this.socket.emit('getQueue');
   }
 }
