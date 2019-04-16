@@ -13,7 +13,10 @@ export class QueueComponent implements OnInit {
   constructor(private socket: SocketService) { }
 
   ngOnInit() {
-    this.socket.onGetQueue()
+    this.socket.getQueue();
+    this.socket.onQueueUpdated$().subscribe((queue) => {
+      this.songResultName = queue;
+    });
 
   }
 
