@@ -28,6 +28,8 @@
 
 .card {
     width: 400px;
+    height: 585px;
+    overflow-y: auto;
 }
 
 .mat-card-header {
@@ -64,4 +66,25 @@ p {
 
 .spacer {
     flex: 1 1 auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #171717; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #171717; 
 }
