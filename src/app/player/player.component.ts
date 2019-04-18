@@ -1,5 +1,6 @@
 import { SpotifyService } from './../spotify.service';
 import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-player',
@@ -26,7 +27,7 @@ export class PlayerComponent implements AfterViewInit{
     this.updateState(data);
   });
 
-  constructor(private spotify: SpotifyService, private ref: ChangeDetectorRef) {
+  constructor(private spotify: SpotifyService, private ref: ChangeDetectorRef, private socket: SocketService) {
     this.getPlaybackTime();
   }
 
@@ -68,7 +69,8 @@ export class PlayerComponent implements AfterViewInit{
     const song = {
       song: data.track_window.current_track.name,
       artist: data.track_window.current_track.artists[0].name,
-      uri: data.track_window.current_track.uri
+      uri: data.track_window.current_track.uri,
+      votes: 0
     };
 
     if (this.currentSong !== song) {
@@ -81,11 +83,11 @@ export class PlayerComponent implements AfterViewInit{
   }
 
   onNext() {
-    this.spotify.skipNext();
+    this.socket.onNext(this.currentSong);
   }
 
   onPrevious() {
-    this.spotify.skipPrevious();
+    this.socket.onPrevious(this.currentSong);
   }
 
   getPlaybackTime() {
@@ -95,12 +97,13 @@ export class PlayerComponent implements AfterViewInit{
           this.playBackTime = data.progress_ms;
           this.playBackPercent = 100 * this.playBackTime / this.playBackDuration;
           this.ref.detectChanges();
-          if (this.playBackPercent >= 99) {
-            this.spotify.pausePlayback();
+          if (this.playBackPercent >= 99.5) {
+
+            this.socket.onNext(this.currentSong);
           }
         });
       }
-    }, 1000);
+    }, 750);
   }
 
 }
