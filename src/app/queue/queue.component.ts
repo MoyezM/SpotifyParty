@@ -17,7 +17,6 @@ export class QueueComponent implements OnInit {
     this.socket.onQueueUpdated$().subscribe((queue) => {
       this.songResultName = queue;
     });
-
   }
 
 }

@@ -4,29 +4,29 @@
       <mat-card-title>Up Next</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let song of songResultName">
-        <div class="container-row">
-          <button  mat-button (click)="onAddQueue(song)">
-            <div>
-              <div class="searchName">
-                {{song.song}} 
-              </div>
+      <span *ngFor="let song of songResultName">
+        <span class="container-row">
+          <button  mat-button>
+            <span>
+              <span class="searchName">
+                {{song.song}}
+              </span>
               <mat-divider></mat-divider>
-              <div class="searchArtist">
+              <span class="searchArtist">
                 {{song.artist}}
-              </div>
-            </div>
+              </span>
+            </span>
           </button>
-          <div class="spacer"></div>
-          <div class="container-arrow">
+          <span class="spacer"></span>
+          <span class="container-arrow">
               {{song.votes}}
-          </div>
-          <div class="container-arrow">
+          </span>
+          <span class="container-arrow">
             <mat-icon color="primary" class="mat-18">arrow_upward</mat-icon>
             <mat-icon color="primary" class="mat-18">arrow_downward</mat-icon>
-          </div>
-        </div>
-      </div>
+          </span>
+        </span>
+      </span>
     </mat-card-content>
   </mat-card>
 </div>

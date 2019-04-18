@@ -21,7 +21,7 @@ export class SpotifyService {
   private stateSubject = new Subject<any>();
   public state$: Observable<any>
   spotifyApi = new SpotifyWebApi();
-  
+
   constructor() {
     this.state$ = this.stateSubject.asObservable();
   }
@@ -52,7 +52,6 @@ export class SpotifyService {
         });
         this.player.addListener('ready', ({ device_id }) => {
           this.deviceId = device_id;
-          console.log(this.deviceId);
         });
         this.player.addListener('player_state_changed', state => {
           this.getState(state);
@@ -111,12 +110,11 @@ export class SpotifyService {
   }
 
   getSongTime() {
-    this.spotifyApi.getMyCurrentPlaybackState()
+    this.spotifyApi.getMyCurrentPlaybackState();
   }
 
   togglePlayback(paused) {
     if (!paused) {
-      console.log(true)
       this.spotifyApi.pause();
     } else if (paused) {
       this.spotifyApi.play();
