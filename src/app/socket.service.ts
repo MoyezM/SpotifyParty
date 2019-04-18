@@ -11,6 +11,12 @@ export class SocketService {
 
   constructor(private spotify: SpotifyService) {
     this.connect();
+    this.onPlaySong$().subscribe((song) => {
+      console.log(song);
+      this.spotify.spotifyApi.play({
+        uris: [song.uri]
+      });
+    });
   }
 
   onGetSong$() {
@@ -23,6 +29,21 @@ export class SocketService {
     let observer =  {
       next: (songQuery) => {
         return songQuery;
+      }
+    };
+    return Rx.Subject.create(observer, observable);
+  }
+
+  onPlaySong$() {
+    const observable = new Observable(observer => {
+      this.socket.on('playSong', (song) => {
+        observer.next(song);
+      });
+    });
+
+    let observer =  {
+      next: (song) => {
+        return song;
       }
     };
     return Rx.Subject.create(observer, observable);
