@@ -14,7 +14,7 @@ export class SocketService {
   }
 
   onGetSong$() {
-    let observable = new Observable(observer => {
+    const observable = new Observable(observer => {
       this.socket.on('getSongFromClient', (songQuery) => {
         observer.next(songQuery);
       });
@@ -30,11 +30,9 @@ export class SocketService {
 
   onGetSong() {
     this.onGetSong$().subscribe((songQuery) => {
-      console.log(songQuery);
-      let query = songQuery.query;
+      const query = songQuery.query;
       this.spotify.spotifyApi.searchTracks(query).then((result) => {
-        console.log(result.tracks.items);
-        let searchResult = {
+        const searchResult = {
           socketId: songQuery.socketId,
           result: result.tracks.items,
         };
@@ -44,14 +42,13 @@ export class SocketService {
   }
 
   onQueueUpdated$() {
-    let observable = new Observable(observer => {
+    const observable = new Observable(observer => {
       this.socket.on('queueUpdated', (queue) => {
-        console.log(queue);
         observer.next(queue);
       });
     });
 
-    let observer =  {
+    const observer =  {
       next: (queue) => {
         return queue;
       }
@@ -66,6 +63,14 @@ export class SocketService {
 
   getQueue() {
     this.socket.emit('getQueue');
+  }
+
+  onNext(currentSong) {
+    this.socket.emit('next', currentSong);
+  }
+
+  onPrevious(currentSong) {
+    this.socket.emit('previous', currentSong);
   }
 }
 

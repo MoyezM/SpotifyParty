@@ -10,31 +10,31 @@
         <mat-progress-bar class="album" mode="determinate" value={{playBackPercent}}></mat-progress-bar>
     </mat-card-content>
     <mat-card-actions>
-      <div class="container-row">
+      <span class="container-row">
         <button mat-icon-button (click)="onPrevious()">
           <mat-icon color="primary" class="mat-18">skip_previous</mat-icon>
         </button>
-        <div [ngSwitch]="paused">
-          <div *ngSwitchCase="true">
+        <span [ngSwitch]="paused">
+          <span *ngSwitchCase="true">
             <button mat-icon-button (click)="togglePlayback()">
               <mat-icon color="primary" class="mat-18">play_arrow</mat-icon>
             </button>
-          </div>
-          <div *ngSwitchCase="false">
+          </span>
+          <span *ngSwitchCase="false">
             <button mat-icon-button (click)="togglePlayback()">
               <mat-icon color="primary" class="mat-18">pause</mat-icon>
             </button>
-          </div>
-          <div *ngSwitchDefault>
+          </span>
+          <span *ngSwitchDefault>
             <button mat-icon-button (click)="togglePlayback()">
               <mat-icon color="primary" class="mat-18">play_arrow</mat-icon>
             </button>
-          </div>
-        </div>
+          </span>
+        </span>
         <button mat-icon-button (click)="onNext()">
           <mat-icon color="primary" class="mat-18">skip_next</mat-icon>
         </button>
-      </div>
+      </span>
     </mat-card-actions>
   </mat-card>
 </div>

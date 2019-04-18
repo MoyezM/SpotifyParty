@@ -1,12 +1,12 @@
 import { SpotifyService } from './../spotify.service';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent {
+export class PlayerComponent implements AfterViewInit{
   imageURL: string;
   artists:  Array<any>;
   artistURI: string;
@@ -23,13 +23,15 @@ export class PlayerComponent {
 
 
   state = this.spotify.state$.subscribe(data => {
-    console.log(data);
     this.updateState(data);
   });
 
   constructor(private spotify: SpotifyService, private ref: ChangeDetectorRef) {
+    this.getPlaybackTime();
+  }
+
+  ngAfterViewInit(): void {
     this.spotify.init();
-    this.getPlaybackTime()
   }
 
   updateState(data: any) {
@@ -91,7 +93,6 @@ export class PlayerComponent {
       if (!this.paused) {
         this.spotify.spotifyApi.getMyCurrentPlaybackState().then((data) => {
           this.playBackTime = data.progress_ms;
-          console.log(this.playBackTime);
           this.playBackPercent = 100 * this.playBackTime / this.playBackDuration;
           this.ref.detectChanges();
           if (this.playBackPercent >= 99) {
