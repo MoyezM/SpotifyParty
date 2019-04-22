@@ -16,8 +16,11 @@ import {
   MatInputModule,
   MatProgressBarModule,
   MatCardModule,
+  MatBottomSheetModule
 } from '@angular/material';
 import { QueueComponent } from './queue/queue.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { QrCodeComponent } from './qr-code/qr-code.component';
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import { QueueComponent } from './queue/queue.component';
     MainComponent,
     PlayerComponent,
     ToolbarComponent,
-    QueueComponent
+    QueueComponent,
+    QrCodeComponent
 
   ],
   imports: [
@@ -40,8 +44,13 @@ import { QueueComponent } from './queue/queue.component';
     MatIconModule,
     MatListModule,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatBottomSheetModule,
+    QRCodeModule
 
+  ],
+  entryComponents: [
+    QrCodeComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

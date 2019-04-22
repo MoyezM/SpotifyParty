@@ -1,5 +1,7 @@
+import { QrCodeComponent } from './../qr-code/qr-code.component';
 import { Component, OnInit } from '@angular/core';
 import { IpService } from '../ip.service';
+import { MatBottomSheet } from '@angular/material';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,11 +12,13 @@ export class ToolbarComponent implements OnInit {
 
   localIp: string;
 
-  constructor(private ip: IpService) { }
+  constructor(private bottomSheet: MatBottomSheet) {}
+
+  openBottomSheet(): void {
+    this.bottomSheet.open(QrCodeComponent);
+  }
 
   ngOnInit() {
-    this.localIp = this.ip.getIp();
-    console.log(this.localIp);
   }
 
 }
