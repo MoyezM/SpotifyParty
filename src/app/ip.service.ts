@@ -16,7 +16,9 @@ export class IpService {
   localIp = sessionStorage.getItem('LOCAL_IP');
   private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
 
-  constructor(private zone: NgZone) {}
+  constructor(private zone: NgZone) {
+    this.determineLocalIp();
+  }
 
   private determineLocalIp() {
     window.RTCPeerConnection = this.getRTCPeerConnection();
