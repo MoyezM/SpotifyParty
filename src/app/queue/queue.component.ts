@@ -8,6 +8,12 @@ import { SocketService } from '../socket.service';
 })
 export class QueueComponent implements OnInit {
 
+  /**
+   * Holds the song results, which is the
+   * queue that is grabbed from the server
+   *
+   * @memberof QueueComponent
+   */
   songResultName = [];
 
   constructor(private socket: SocketService) { }
