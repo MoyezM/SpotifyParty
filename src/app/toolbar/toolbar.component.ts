@@ -10,10 +10,22 @@ import { MatBottomSheet } from '@angular/material';
 })
 export class ToolbarComponent implements OnInit {
 
+  /**
+   * Holds the local IP for the client
+   *
+   * @type {string}
+   * @memberof ToolbarComponent
+   */
   localIp: string;
 
   constructor(private bottomSheet: MatBottomSheet) {}
 
+  /**
+   * Handles the connect button in the toolbar
+   * Opens the bottom sheet with the qr-code
+   *
+   * @memberof ToolbarComponent
+   */
   openBottomSheet(): void {
     this.bottomSheet.open(QrCodeComponent);
   }
