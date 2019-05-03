@@ -11,8 +11,20 @@ export class QrCodeComponent implements OnInit {
 
   constructor(private bottomSheetRef: MatBottomSheetRef<QrCodeComponent>, private ip: IpService) {}
 
+  /**
+   * Holds the local IP for the client
+   *
+   * @type {string}
+   * @memberof QrCodeComponent
+   */
   public localIp: string;
 
+  /**
+   * Handles the connect call from the toolbar
+   *
+   * @param {MouseEvent} event
+   * @memberof QrCodeComponent
+   */
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
